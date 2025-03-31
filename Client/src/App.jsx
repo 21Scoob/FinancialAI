@@ -1,51 +1,21 @@
-import React, { useState } from "react";
-import Sidebar from "./components/Sidebar";
-import Topbar from "./components/TopBar";
-import AgentCard from "./components/AgentCard";
-import {
-  FaChartLine,
-  FaCoins,
-  FaMoneyBillWave,
-  FaFileAlt,
-} from "react-icons/fa";
-import "./index.css";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Main from "./pages/Main.jsx";
+import Stocks from "./pages/Stocks.jsx";
+import Budget from "./pages/Budget.jsx";
+import Settings from "./pages/Settings.jsx";
+import Reports from "./pages/Reports.jsx";
 
-function App() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
+export default function App() {
   return (
-    <div className="dark bg-gray-900 text-white flex h-screen overflow-hidden">
-      {/* Mobile Sidebar */}
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col w-full overflow-hidden">
-        <Topbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
-        <main className="flex-1 p-4 sm:p-6 bg-gray-900 overflow-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <AgentCard
-            title="StockBot"
-            data="AAPL is trending positive. Suggest Buy. Risk: Medium"
-            icon={<FaChartLine />}
-          />
-          <AgentCard
-            title="CryptoBot"
-            data="BTC sentiment is mixed. Suggest Hold. Volatility high."
-            icon={<FaCoins />}
-          />
-          <AgentCard
-            title="BudgetBot"
-            data="Spending is 14% over plan. Suggest cut on entertainment."
-            icon={<FaMoneyBillWave />}
-          />
-          <AgentCard
-            title="ReportBot"
-            data="Summary ready. Click to export full report."
-            icon={<FaFileAlt />}
-          />
-        </main>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/stocks" element={<Stocks />} />
+        <Route path="/budget" element={<Budget />} />
+        <Route path="/reports" element={<Reports />} />
+        <Route path="/settings" element={<Settings />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
