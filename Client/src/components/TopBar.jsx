@@ -7,7 +7,11 @@ export default function Topbar({ onMenuClick }) {
       {/* Hamburger Menu on Mobile */}
       <div className="flex items-center gap-3">
         <button
+<<<<<<< HEAD
           className=" p-2 rounded hover:bg-gray-700"
+=======
+          className="md:hidden p-2 rounded hover:bg-gray-700"
+>>>>>>> 237ca2a08cdeac438df9905fe15484563ebaeb2e
           onClick={onMenuClick}
         >
           <HiMenu className="w-6 h-6" />
