@@ -6,7 +6,7 @@ export default function Sidebar({ isOpen, onClose }) {
     <>
       {/* 🔲 Backdrop on Mobile */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-40 z-30 transition-opacity ${
+        className={`fixed inset-0 bg-black/50 bg-opacity-40 z-30 transition-opacity ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={onClose}

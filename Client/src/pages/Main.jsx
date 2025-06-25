@@ -1,6 +1,7 @@
 import Sidebar from "../components/Sidebar.jsx";
 import Topbar from "../components/TopBar.jsx";
 import AgentCard from "../components/AgentCard.jsx";
+import Footer from "../components/Footer.jsx";
 import {
   FaChartLine,
   FaCoins,
@@ -14,7 +15,7 @@ function Main() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="dark bg-gray-900 text-white flex h-screen overflow-hidden">
+    <div className="dark bg-gray-900 text-white flex flex-col h-screen overflow-hidden">
       {/* Mobile Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
@@ -44,6 +45,8 @@ function Main() {
           />
         </main>
       </div>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
