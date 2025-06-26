@@ -1,17 +1,41 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/TopBar";
 import Footer from "../components/Footer";
 
 export default function Signup() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("Parolele nu coincid!");
+      return;
+    }
+
+    try {
+      const res = await axios.post("http://localhost:3004/api/users/signup", {
+        name,
+        email,
+        password,
+      });
+      console.log("✅ Signup successful:", res.data);
+      alert("Cont creat cu succes!");
+    } catch (error) {
+      console.error("❌ Signup failed:", error.response?.data || error.message);
+      alert("Eroare la creare cont.");
+    }
+  };
 
   return (
     <div className="flex flex-col h-screen bg-gray-900 text-white overflow-hidden">
-      {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
-      {/* Main content */}
       <div className="flex-1 flex flex-col w-full overflow-hidden">
         <Topbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
 
@@ -20,12 +44,14 @@ export default function Signup() {
             <h2 className="text-2xl font-semibold mb-6 text-center">
               Create Account
             </h2>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSignup}>
               <div>
                 <label className="block mb-1 text-sm">Name</label>
                 <input
                   type="text"
-                  className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full p-2 rounded bg-gray-700 border border-gray-600"
                   placeholder="John Doe"
                 />
               </div>
@@ -33,7 +59,9 @@ export default function Signup() {
                 <label className="block mb-1 text-sm">Email</label>
                 <input
                   type="email"
-                  className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full p-2 rounded bg-gray-700 border border-gray-600"
                   placeholder="you@example.com"
                 />
               </div>
@@ -41,7 +69,9 @@ export default function Signup() {
                 <label className="block mb-1 text-sm">Password</label>
                 <input
                   type="password"
-                  className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full p-2 rounded bg-gray-700 border border-gray-600"
                   placeholder="••••••••"
                 />
               </div>
@@ -49,7 +79,9 @@ export default function Signup() {
                 <label className="block mb-1 text-sm">Confirm Password</label>
                 <input
                   type="password"
-                  className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="w-full p-2 rounded bg-gray-700 border border-gray-600"
                   placeholder="••••••••"
                 />
               </div>

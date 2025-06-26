@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { HiMenu } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
 
 export default function Topbar({ onMenuClick }) {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem("user");
+    if (userInfo) setUser(JSON.parse(userInfo));
+  }, []);
   return (
     <header className="w-full h-16 flex items-center justify-between px-4 sm:px-6 bg-gray-800 border-b border-gray-700 text-white">
       {/* Hamburger Menu on Mobile */}
@@ -19,12 +27,24 @@ export default function Topbar({ onMenuClick }) {
 
       {/* User Avatar */}
       <div className="flex items-center gap-2">
-        <span className="text-sm">Welcome, User</span>
-        <img
-          className="w-8 h-8 rounded-full"
-          src="https://i.pravatar.cc/300"
-          alt="avatar"
-        />
+        {user ? (
+          <span className="text-sm">Welcome, {user.name}</span>
+        ) : (
+          <>
+            <button
+              className="p-2 rounded hover:bg-gray-700"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </button>
+            <button
+              className="p-2 rounded hover:bg-gray-700"
+              onClick={() => navigate("/signup")}
+            >
+              Signup
+            </button>
+          </>
+        )}
       </div>
     </header>
   );
