@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { userAPI } from "../api/api";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/TopBar";
 import Footer from "../components/Footer";
@@ -19,17 +19,19 @@ export default function Signup() {
       return;
     }
 
-    try {
-      const res = await axios.post("http://localhost:3004/api/users/signup", {
-        name,
-        email,
-        password,
-      });
-      console.log("✅ Signup successful:", res.data);
+    const result = await userAPI.signup({
+      name,
+      email,
+      password,
+    });
+
+    if (result.success) {
+      console.log("✅ Signup successful:", result.data);
       alert("Cont creat cu succes!");
-    } catch (error) {
-      console.error("❌ Signup failed:", error.response?.data || error.message);
-      alert("Eroare la creare cont.");
+      // Redirect la login sau dashboard
+    } else {
+      console.error("❌ Signup failed:", result.error);
+      alert(result.error);
     }
   };
 

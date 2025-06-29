@@ -5,7 +5,6 @@ import { connectDB } from "./config/db.js";
 import budgetRoutes from "./routes/budgetRoutes.js";
 import userRoutes from "./routes/UserRoutes.js";
 dotenv.config();
-
 const app = express();
 connectDB(); // <--- conectare DB
 

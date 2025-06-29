@@ -24,6 +24,7 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
+    console.log("🔥 Received signin request", req.body);
     res.json({ _id: user._id, name: user.name, email: user.email });
   } catch (err) {
     res.status(500).json({ message: "Server error" });
