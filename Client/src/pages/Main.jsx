@@ -45,7 +45,7 @@ function Main() {
           />
         </main>
       </div>
-      {/* Footer */}
+      {/* Footer - va apărea automat când se scrollează la sfârșit */}
       <Footer />
     </div>
   );

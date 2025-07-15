@@ -67,6 +67,7 @@ export default function Login() {
           </div>
         </main>
 
+        {/* Footer - va apărea automat când se scrollează la sfârșit */}
         <Footer />
       </div>
     </div>

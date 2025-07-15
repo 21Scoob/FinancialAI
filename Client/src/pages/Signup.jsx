@@ -103,6 +103,7 @@ export default function Signup() {
           </div>
         </main>
 
+        {/* Footer - va apărea automat când se scrollează la sfârșit */}
         <Footer />
       </div>
     </div>
