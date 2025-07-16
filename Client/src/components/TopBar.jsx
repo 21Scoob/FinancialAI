@@ -15,14 +15,17 @@ export default function Topbar({ onMenuClick }) {
       {/* Hamburger Menu on Mobile */}
       <div className="flex items-center gap-3">
         <button
-          className=" p-2 rounded hover:bg-gray-700"
+          className=" p-2 rounded hover:bg-gray-700 cursor-pointer"
           onClick={onMenuClick}
         >
           <HiMenu className="w-6 h-6" />
         </button>
-        <h2 className="text-lg sm:text-xl font-semibold">
+        <button
+          className="text-lg sm:text-xl font-semibold cursor-pointer"
+          onClick={() => navigate("/")}
+        >
           Your AI Financial Assistant
-        </h2>
+        </button>
       </div>
 
       {/* User Avatar */}
